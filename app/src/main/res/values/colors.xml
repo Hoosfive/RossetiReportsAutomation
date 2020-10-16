@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#23213F</color>
+    <color name="colorAccent">#1EF0D7</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRipple">#CEA46C</color>
+    <color name="colorError">#FF575D</color>
+    <color name="colorLighterPrimary">#312F51</color>
+    <color name="colorBottomNavigationBackgroundMainActivity">#12102B</color>
+</resources>
