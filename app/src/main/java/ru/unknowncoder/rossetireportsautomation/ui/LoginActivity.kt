@@ -6,11 +6,14 @@ import android.text.InputType
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
 import ru.unknowncoder.rossetireportsautomation.R
-import ru.unknowncoder.rossetireportsautomation.model.NetworkService
+import ru.unknowncoder.rossetireportsautomation.domain.LoginDataBody
+import ru.unknowncoder.rossetireportsautomation.domain.UserBody
 import ru.unknowncoder.rossetireportsautomation.model.Preferences
-import ru.unknowncoder.rossetireportsautomation.model.response.LoginResponseBody
 
 
 class LoginActivity : AppCompatActivity() {
@@ -21,6 +24,9 @@ class LoginActivity : AppCompatActivity() {
         private const val MIN_PASS_LENGTH = 8
     }
 
+    private lateinit var auth: FirebaseAuth
+    private var firebaseUser: FirebaseUser? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -29,23 +35,30 @@ class LoginActivity : AppCompatActivity() {
         initListeners()
     }
 
+    override fun onStart() {
+        super.onStart()
+        firebaseUser = auth.currentUser
+    }
+
     private fun initListeners() {
         passLayout.endIconImageButton.setOnClickListener {
             togglePasswordVisibility()
         }
         loginBtn.setOnClickListener {
             if (validateFields()) {
-                NetworkService.auth(
-                    loginLine.text.toString(),
-                    passLine.text.toString(), {
-                        saveData(it)
-                        startActivity(Intent(this, MainActivity::class.java))
-                        this.finish()
-                    }, {
-                        showError()
-                    })
-                setLoading(true)
+                authUser()
             }
+            /*private var firebaseUser: FirebaseUser? = null
+            private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
+            fun auth(email: String, password: String): FirebaseUser? {
+                firebaseAuth
+                    .signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            firebaseUser = task.result?.user
+                        }
+                    }*/
         }
         passLine.setOnFocusChangeListener { _, _ ->
             setPassHelperTextVisibility()
@@ -53,6 +66,24 @@ class LoginActivity : AppCompatActivity() {
         passLayout.setSimpleTextChangeWatcher { _, _ ->
             setPassHelperTextVisibility()
         }
+    }
+
+    private fun authUser() {
+        setLoading(true)
+        auth
+            .signInWithEmailAndPassword(
+                loginLine.text.toString(),
+                passLine.text.toString()
+            )
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    firebaseUser = task.result?.user
+                    saveData(LoginDataBody(loginLine.text.toString(), firebaseUser?.uid.toString()))
+                } else if (task.isCanceled) {
+                    showError()
+                    setLoading(true)
+                }
+            }
     }
 
     private fun togglePasswordVisibility() {
@@ -103,12 +134,32 @@ class LoginActivity : AppCompatActivity() {
         else passLayout.helperText = " "
     }
 
-    private fun saveData(loginResponse: LoginResponseBody) {
-        Preferences.editAuthTokenPref(
+    private fun saveData(loginDataBody: LoginDataBody) {
+        Preferences.editUserLoginDataPref(
             baseContext,
-            loginResponse.accessToken
+            loginDataBody
         )
-        Preferences.editUserInfoPrefs(baseContext, loginResponse.userInfoResponseBody)
+        // Create a reference to the cities collection
+        val db = FirebaseFirestore.getInstance()
+        db.collection("electritians").whereEqualTo("user_token", loginDataBody.uid)
+            .get()
+            .addOnSuccessListener { documents ->
+                Preferences.editUserInfoPrefs(
+                    baseContext, UserBody(
+                        documents.first().getString("name").toString(),
+                        documents.first().getString("surname").toString(),
+                        documents.first().getString("paronymic").toString(),
+                        documents.first().getString("point").toString()
+                    )
+                )
+                startActivity(Intent(this, MainActivity::class.java))
+                this.finish()
+            }
+            .addOnFailureListener {
+                showError()
+            }
+// Create a query against the collection.
+
         setLoading(false)
     }
 

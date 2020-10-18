@@ -4,4 +4,11 @@
         <item name="colorControlHighlight">@color/colorRipple</item>
     </style>
 
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
+    </style>>
+
+
 </resources>

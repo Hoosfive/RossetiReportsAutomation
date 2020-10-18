@@ -1,8 +1,8 @@
-package ru.unknowncoder.rossetireportsautomation.model.response
+package ru.unknowncoder.rossetireportsautomation.domain
 
 import com.google.gson.annotations.SerializedName
 
-data class MemesResponseBody(
+data class TaskBody(
     @SerializedName("id") val id: String,
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String,

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#23213F</color>
-    <color name="colorAccent">#1EF0D7</color>
+    <color name="colorPrimary">#E5E5E5</color>
+    <color name="colorAccent">#384A9D</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorRipple">#CEA46C</color>
     <color name="colorError">#FF575D</color>
     <color name="colorLighterPrimary">#312F51</color>
     <color name="colorBottomNavigationBackgroundMainActivity">#12102B</color>
+    <color name="colorPriorityThird">#77DD6E</color>
+    <color name="colorPrioritySecond">#FAF353</color>
+    <color name="colorPriorityFirst">#EB8080</color>
+    <color name="colorOutline">#000000</color>
+    <color name="colorStatusBar">#00000000</color>
+    <color name="colorBackgroundMain">#E5E5E5</color>
 </resources>

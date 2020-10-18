@@ -4,17 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/popular_meme_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="8dp"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/taskListTitle"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorAccent"
+            android:background="#4DFFFFFF"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memes_rv"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical" />
 
@@ -35,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/popularMemesErrorStubText"
+                android:text="@string/taskListErrorStubText"
                 android:textAlignment="center"
                 android:visibility="invisible" />
         </FrameLayout>

@@ -6,9 +6,12 @@
     <string name="passHelperText">Пароль должен содержать %1$d символов</string>
     <string name="emptyFieldsError">Поле не может быть пустым</string>
     <string name="loginSnackBarErrorText">Во время запроса произошла ошибка, возможно вы неверно ввели логин/пароль</string>
-    <string name="popularMemesSnackBarErrorText">Отсутствует интернет-соединение\nПопробуйте позже</string>
-    <string name="popularMemesErrorStubText">Не удалось загрузить ленту\nОбновите экран или попробуйте позже.</string>
-    <string name="popularMemesTitle">Популярные мемы</string>
-    <string name="createMemeTitle">Создать мем</string>
+    <string name="taskListSnackBarErrorText">Отсутствует интернет-соединение\nПопробуйте позже</string>
+    <string name="taskListErrorStubText">Не удалось загрузить ленту\nОбновите экран или попробуйте позже.</string>
+    <string name="taskListTitle">Список задач</string>
+    <string name="defectListTitle">Отчёт</string>
     <string name="profileTitle">Профиль</string>
+    <string name="startWork">Взять в работу</string>
+    <string name="autorizationTitle">Авторизация</string>
+    <string name="profilePointTitle">Объект:</string>
 </resources>

@@ -8,26 +8,27 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_popular_memes.*
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_task_list.*
 import ru.unknowncoder.rossetireportsautomation.R
-import ru.unknowncoder.rossetireportsautomation.model.NetworkService
-import ru.unknowncoder.rossetireportsautomation.model.response.MemesResponseBody
-import ru.unknowncoder.rossetireportsautomation.ui.adapter.MemeListAdapter
+import ru.unknowncoder.rossetireportsautomation.ui.adapter.TaskListAdapter
 
-class PopularMemesFragment : Fragment() {
+
+class TaskListFragment : Fragment() {
 
     companion object {
         fun newInstance(): Fragment {
-            return PopularMemesFragment()
+            return TaskListFragment()
         }
     }
 
-    private val adapter = MemeListAdapter()
-    lateinit var fragmentView : View
+    private val adapter = TaskListAdapter()
+    private lateinit var fragmentView: View
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,18 +43,19 @@ class PopularMemesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         fragmentView = inflater.inflate(
-            R.layout.fragment_popular_memes, container,
+            R.layout.fragment_task_list, container,
             false
         )
         initRecyclerView()
         swipeInit()
-        getMemes()
+        getTasks()
         return fragmentView
     }
 
-    private fun getMemes() {
+    private fun getTasks() {
+        setStub(false)
         setLoading(true)
-        NetworkService.getMemes({
+        /*NetworkService.getMemes({
             showMemes(it)
             setLoading(false)
             setStub(false)
@@ -61,25 +63,36 @@ class PopularMemesFragment : Fragment() {
             showError()
             setLoading(false)
             setStub(true)
-        })
+        })*/
+        val db = FirebaseFirestore.getInstance()
+        db.collection("tasks")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    showTasks(task.result!!.documents)
+                } else {
+                    showError()
+                }
+            }
+
     }
 
     private fun initRecyclerView() {
         val recyclerView = fragmentView.findViewById<RecyclerView>(R.id.memes_rv)
         recyclerView.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }
 
 
-    private fun showMemes(memes: List<MemesResponseBody>) {
-        adapter.setData(memes)
+    private fun showTasks(tasks: List<DocumentSnapshot>) {
+        adapter.setData(tasks)
     }
 
     private fun showError() {
         val snack = Snackbar.make(
             popular_meme_layout,
-            R.string.popularMemesSnackBarErrorText,
+            R.string.taskListSnackBarErrorText,
             Snackbar.LENGTH_LONG
         )
         snack.view.setBackgroundColor(resources.getColor(R.color.colorError))
@@ -105,7 +118,7 @@ class PopularMemesFragment : Fragment() {
         val swipeRefresh = fragmentView.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
         swipeRefresh.setOnRefreshListener {
             val runnable = Runnable {
-                getMemes()
+                getTasks()
                 swipeRefresh.isRefreshing = false
             }
 

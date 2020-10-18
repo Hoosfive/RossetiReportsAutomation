@@ -8,6 +8,22 @@
     android:orientation="vertical"
     tools:context=".ui.LoginActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="34dp"
+        android:text="@string/autorizationTitle"
+        android:textColor="@color/colorAccent"
+        android:textSize="34sp"
+        android:fontFamily=""
+        android:shadowColor="#40000000"
+        android:shadowDy="4"
+        android:shadowRadius="4"
+        android:fontFeatureSettings="pnum, lnum"
+        />
+
+
     <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
         android:id="@+id/loginLayout"
         android:layout_width="match_parent"
@@ -25,7 +41,7 @@
             android:id="@+id/loginLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="phone"
+            android:inputType="textEmailAddress"
             android:paddingLeft="12dp"
             android:paddingRight="14dp"
             android:singleLine="false"

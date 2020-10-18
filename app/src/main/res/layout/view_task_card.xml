@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardElevation="8dp"
+        app:strokeColor="@color/colorOutline"
+        app:strokeWidth="2dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FAFAFA"
+            android:orientation="vertical">
+
+
+            <!-- Media -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="194dp"
+                android:contentDescription="TODO"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/card_image" />
+
+            <View
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/priority_indicator"
+                tools:ignore="RtlHardcoded" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="192dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:id="@+id/taskTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="ЛОЛ"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/taskDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ЛОЛ2"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/startWork"
+                    android:layout_width="175dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/colorAccent"
+                    android:text="@string/startWork" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

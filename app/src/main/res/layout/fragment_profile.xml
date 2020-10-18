@@ -7,7 +7,46 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="profile fragment"
-        android:textSize="50sp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#4DFFFFFF"
+        android:text="@string/profileTitle"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/userNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="25dp"
+            android:text="@string/profilePointTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/userPointTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:text=""
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+    </LinearLayout>
+
 </LinearLayout>

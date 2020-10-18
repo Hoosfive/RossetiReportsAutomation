@@ -5,27 +5,15 @@
     android:id="@+id/mainActivityLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorLighterPrimary"
-        app:titleTextColor="@color/colorWhite"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        android:title="@string/popularMemesTitle" />
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"

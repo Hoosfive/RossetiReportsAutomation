@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.unknowncoder.rossetireportsautomation.R
-import ru.unknowncoder.rossetireportsautomation.ui.CreateMemeFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.btn_popular_memes -> {
-                        val fragment = PopularMemesFragment.newInstance()
+                        val fragment = TaskListFragment.newInstance()
                         supportFragmentManager.beginTransaction()
                             .replace(
                                 R.id.fragment_container,
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.btn_create_meme -> {
-                        val fragment = CreateMemeFragment.newInstance()
+                        val fragment = DefectEditFragment.newInstance()
                         supportFragmentManager.beginTransaction()
                             .replace(
                                 R.id.fragment_container,
